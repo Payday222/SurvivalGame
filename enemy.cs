@@ -13,15 +13,6 @@ public class enemy : MonoBehaviour
     public enemyData enemyData;
     public playerAttack pattack;
         public int damage;
-    public damageDie _damagedie;
-    public enum damageDie {
-        d4,
-        d6,
-        d8,
-        d10,
-        d12,
-        d20,
-    }
         private void Update()
     {
         if(this.enemyData.enemyCurrentHealth <= 0) {
@@ -43,28 +34,29 @@ public class enemy : MonoBehaviour
 
         }
     }
-        public void RollDamageDie() {
-        switch(_damagedie) {
-            case damageDie.d4: 
+   public void RollDamageDie() {
+
+        switch(this.enemyData._damageDice) {
+            case enemyData.damageDice.d4: 
                 damage = UnityEngine.Random.Range(1, 5);
             break;
-            case damageDie.d6:
+            case enemyData.damageDice.d6:
                 damage = UnityEngine.Random.Range(1,7);
             break;
 
-            case damageDie.d8:
+            case enemyData.damageDice.d8:
                 damage = UnityEngine.Random.Range(1,9);
             break;
 
-            case damageDie.d10:
+            case enemyData.damageDice.d10:
                 damage = UnityEngine.Random.Range(1, 11);
             break;
 
-            case damageDie.d12:
+            case enemyData.damageDice.d12:
                 damage = UnityEngine.Random.Range(1, 13);
             break;
 
-            case damageDie.d20:
+            case enemyData.damageDice.d20:
                 damage = UnityEngine.Random.Range(1, 21);
             break;
 
@@ -73,7 +65,6 @@ public class enemy : MonoBehaviour
             Debug.Log("Damagedie is invalid");
             break;
         }
-    }
 
     public void RollHealthDice() {
         switch(this.enemyData._healthDice) {
