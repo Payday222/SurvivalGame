@@ -22,10 +22,18 @@ public class enemy : MonoBehaviour
         d12,
         d20,
     }
+        private void Update()
+    {
+        if(this.enemyData.enemyCurrentHealth <= 0) {
+            Destroy(this.gameObject);
+        }
+    }
     
     void Start()
     {
-        enemyData.enemyHealth = 150;
+             RollHealthDice();
+            this.enemyData.enemyCurrentHealth = this.enemyData.enemyMaxHealth;
+            Debug.Log(this.enemyData.enemyMaxHealth);
     }
 
     public void TakeDamage(int damageTaken) {
@@ -66,13 +74,38 @@ public class enemy : MonoBehaviour
             break;
         }
     }
+
+    public void RollHealthDice() {
+        switch(this.enemyData._healthDice) {
+            case enemyData.healthDice.d4:
+            this.enemyData.enemyMaxHealth = UnityEngine.Random.Range(1, 5);
+            break;
+            case enemyData.healthDice.d6:
+            this.enemyData.enemyMaxHealth = UnityEngine.Random.Range(1, 7);
+            break;
+            case enemyData.healthDice.d8:
+            this.enemyData.enemyMaxHealth = UnityEngine.Random.Range(1, 9);
+            break;
+            case enemyData.healthDice.d10:
+            this.enemyData.enemyMaxHealth  = UnityEngine.Random.Range(1,11);
+            break;
+            case enemyData.healthDice.d12:
+            this.enemyData.enemyMaxHealth  = UnityEngine.Random.Range(1,13);
+            break;
+            case enemyData.healthDice.d20:
+            this.enemyData.enemyMaxHealth  = UnityEngine.Random.Range(1,21);
+            break;
+            default:
+            Debug.Log("enemy health dice is invalid");
+            this.enemyData.enemyCurrentHealth = 0; // haha die
+            break;
+            
+        }
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.tag == "Weapon") {
             TakeDamage(pattack.damage);
         }
-    }
-    public void FollowPlayer() {
-        
     }
 }
