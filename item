@@ -1,0 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
+using UnityEngine;
+[RequireComponent(typeof(Rigidbody2D))]
+public class item : MonoBehaviour
+{
+public itemdata itemdata;
+[HideInInspector] public Rigidbody2D rb;
+
+private void Awake()
+{
+    rb = GetComponent<Rigidbody2D>();
+}
+}

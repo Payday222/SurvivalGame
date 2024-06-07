@@ -1,0 +1,46 @@
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Data.Common;
+using Unity.VisualScripting;
+
+public class barrel : MonoBehaviour
+{
+    public GameObject turnip;
+    public GameObject shit;
+    private int droppeditem;
+    private int health = 100;
+    public int damageTaken;
+    public playerAttack pattack;
+void OnTriggerEnter2D(Collider2D other)
+{
+
+    if(other.gameObject.tag == "Weapon") 
+    {
+        this.damageTaken = pattack.damage;
+        health -= damageTaken;
+        if(health <= 0) {
+        droppeditem = UnityEngine.Random.Range(0, 2);
+                 UnityEngine.Debug.Log(droppeditem);
+        switch (droppeditem) 
+        {
+            case 0: //turnip
+                        UnityEngine.Debug.Log("spawning turnip");
+
+            Instantiate(turnip, this.transform.position, Quaternion.identity);
+            break;
+            case 1: 
+            UnityEngine.Debug.Log("spawning shit");
+            Instantiate(shit, this.transform.position, Quaternion.identity);
+            break;
+            default:
+            UnityEngine.Debug.Log("droppeditem = 0");
+            break;
+        }
+    Destroy(this.gameObject);
+    }
+    }
+}
+}

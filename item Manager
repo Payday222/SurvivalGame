@@ -1,0 +1,30 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class itemManager : MonoBehaviour
+{
+public item[] items;
+private Dictionary<string, item> nameToItemDict = 
+new Dictionary<string, item>();
+
+void Awake()
+{
+    foreach(item item in items) {
+        Additem(item);
+    }
+}
+private void Additem(item item) {
+    if(!nameToItemDict.ContainsKey(item.itemdata.itemName)) {
+        nameToItemDict.Add(item.itemdata.itemName, item);
+    }
+}
+public item GetItemByName(string key) {
+    if(nameToItemDict.ContainsKey(key)) {
+        return nameToItemDict[key];
+    } else {
+        return null;
+    }
+}
+}
