@@ -9,6 +9,16 @@ public class enemyData : ScriptableObject
 {
 public string enemyName;
 public int enemyHealth;
+public enum damageide {
+        d4,
+        d6,
+        d8,
+        d10,
+        d12,
+        d20,
+    }
+    public damageide _damageide;
+public int damage;
 public int enemyDamage;
 public enum EnemyWeight {
     LIGHT,
