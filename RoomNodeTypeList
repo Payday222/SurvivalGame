@@ -1,0 +1,19 @@
+using System.Runtime.InteropServices;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+[CreateAssetMenu(fileName = "roomNodeTypeListSO", menuName = "Scriptable Objects/Dungeon/Room Node Type List")]
+public class RoomNodeTypeList : ScriptableObject
+{
+    [Tooltip("This list should be populated with all the RoomNodeTypeSO for the game - it is used instead of an enum")]
+public List<RoomNodeTypeSO> list;
+
+#region Validation
+#if UNITY_EDITOR
+private void OnValidate() {
+    HelperUtilities.ValidateCheckEnumerableObject(this, nameof(list), list);
+}
+#endif
+#endregion Validation
+
+}
