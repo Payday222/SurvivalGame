@@ -1,0 +1,53 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
+
+public class Inventory_UI : MonoBehaviour
+{
+    public item item;
+    public GameObject invPanel;
+    public player player;
+    public List<Slot_UI> slots = new List<Slot_UI>();
+    void Start()
+    {
+        invPanel.SetActive(false);
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Tab)) {
+            ToggleInventory(); 
+        }
+    }
+    public void ToggleInventory() {
+        if(!invPanel.activeSelf) {
+            invPanel.SetActive(true);
+             Refresh(); 
+        } else {
+            invPanel.SetActive(false);
+        }
+
+    }
+     public void Refresh() { //correct
+         if(slots.Count == player.inventory.slots.Count) {
+            
+             for(int i = 0; i < slots.Count; i++) {                
+                 if(player.inventory.slots[i].itemname != "") { // error here
+                    slots[i].SetItem(player.inventory.slots[i]);
+                 } else {
+                    slots[i].SetEmpty(); 
+                 }
+             }
+         }
+         }
+         public void Remove(int slotID) {
+            item itemToDrop = GameManager.Instance.itemManager.GetItemByName(player.inventory.slots[slotID].itemname);
+            if(itemToDrop != null) {
+                player.DropItem(itemToDrop);
+            player.inventory.Remove(slotID);
+            Refresh();
+            }
+
+         }
+     }
