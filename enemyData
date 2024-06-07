@@ -18,6 +18,17 @@ public enum damageide {
         d20,
     }
     public damageide _damageide;
+      public enum healthDice {
+
+        d4,
+        d6,
+        d8,
+        d10,
+        d12,
+        d20,
+
+    }
+    public healthDice _healthDice;
 public int damage;
 public int enemyDamage;
 public enum EnemyWeight {
