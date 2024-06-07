@@ -1,0 +1,68 @@
+using System.Security.AccessControl;
+using System;
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using Unity.VisualScripting;
+
+public class player : MonoBehaviour
+{
+    //TODO:
+    //1.Make wallclip fix better lol
+    
+    private Vector2 direction;
+
+public Inventory inventory;
+public GameObject SwordSwing;
+public bool isWall;
+
+void Update()
+{
+    Movement();
+    Vector2 distance = new Vector2 (this.transform.position.x + 5, this.transform.position.y + 10);
+}
+
+public void Movement() {
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
+        direction = Vector2.up;
+    } else if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
+        direction = Vector2.left;
+} else if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
+    direction = Vector2.down;
+} else if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
+    direction = Vector2.right;
+} 
+if(Input.GetKeyUp(KeyCode.W) || (Input.GetKeyUp(KeyCode.UpArrow)) 
+|| Input.GetKeyUp(KeyCode.A) || (Input.GetKeyUp(KeyCode.LeftArrow))
+|| Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow)
+|| Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow)) {
+    direction = Vector2.zero;
+}
+}
+void FixedUpdate()
+{
+    #region movement
+    transform.position = new Vector2(
+        transform.position.x + direction.x,
+        transform.position.y + direction.y
+    );
+    #endregion movement
+}
+private void Awake()
+{
+    inventory = new Inventory(24);
+}
+
+public void DropItem(item item) {
+    Vector2 spawnlocation = transform.position;
+
+    Vector2 spawnOffset = UnityEngine.Random.insideUnitCircle * 1.25f;
+
+    item droppedItem = Instantiate(item, spawnlocation + spawnOffset, Quaternion.identity);
+    droppedItem.rb.AddForce(spawnOffset * 2f, ForceMode2D.Impulse);
+ }
+
+}
+
