@@ -65,7 +65,7 @@ public class enemy : MonoBehaviour
             Debug.Log("Damagedie is invalid");
             break;
         }
-   }
+
     public void RollHealthDice() {
         switch(this.enemyData._healthDice) {
             case enemyData.healthDice.d4:
