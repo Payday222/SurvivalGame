@@ -13,12 +13,6 @@ public class enemy : MonoBehaviour
     public enemyData enemyData;
     public playerAttack pattack;
         public int damage;
-        private void Update()
-    {
-        if(this.enemyData.enemyCurrentHealth <= 0) {
-            Destroy(this.gameObject);
-        }
-    }
     
     void Start()
     {
@@ -93,10 +87,19 @@ public class enemy : MonoBehaviour
             
         }
     }
-    void OnTriggerEnter2D(Collider2D other)
+ void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.tag == "Weapon") {
-            TakeDamage(pattack.damage);
+            other.gameObject.GetComponent<Weapon>().RollDamageDice();  // NullReferenceException here
+            this.enemyData.enemyCurrentHealth -= other.gameObject.GetComponent<Weapon>().Weapondamage;
+            
+            
+            
+            
+            
+            // other.gameObject.GetComponent<Weapon>().RollDamageDie();
+            // Debug.Log(other.gameObject.GetComponent<Weapon>().Weapondamage);
+            // TakeDamage(other.gameObject.GetComponent<Weapon>().Weapondamage);
         }
     }
 }
