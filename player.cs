@@ -16,14 +16,28 @@ public class player : MonoBehaviour
 
 public Inventory inventory;
 public GameObject SwordSwing;
-public bool isWall;
-
+public int maxHealth;
+public int currentHealth;
+void Start()
+{
+    maxHealth = 100;
+    currentHealth = maxHealth;
+}
 void Update()
 {
     Movement();
     Vector2 distance = new Vector2 (this.transform.position.x + 5, this.transform.position.y + 10);
 }
 
+void OnTriggerEnter2D(Collider2D other)
+{
+    if(other.gameObject.tag == "Enemy") {
+      other.gameObject.GetComponent<enemy>().RollDamageDie();
+      currentHealth -= other.gameObject.GetComponent<enemy>().damage;
+      Debug.Log("" + currentHealth);
+      Debug.Log("damage: " + other.gameObject.GetComponent<enemy>().damage);
+    }
+}
 public void Movement() {
         if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
         direction = Vector2.up;
