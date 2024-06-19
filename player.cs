@@ -86,6 +86,19 @@ public void DropItem(item item) {
     item droppedItem = Instantiate(item, spawnlocation + spawnOffset, Quaternion.identity);
     droppedItem.rb.AddForce(spawnOffset * 2f, ForceMode2D.Impulse);
  }
+public bool CheckForSword() {
+    Debug.Log(this.inventory.slots.Count);
+    for(int i = this.inventory.slots.Count - 1; i >= 0; i--) {
+        Debug.Log("i" + i);
+        if(this.inventory.slots[i].itemname == "Sword") {
+        Debug.Log("Player has a sword in their inventory, execute attack");
+            return true;
+        }
+        
+            Debug.Log("Player does not have a sword in their inventory");
+    }
+    return false;
+} 
 
 }
 

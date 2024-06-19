@@ -18,7 +18,8 @@ private void Update()
         transform.localRotation = Quaternion.Euler(0, 0,angle);
     if(timeUntillMelee <= 0) {
         if(Input.GetKeyDown(KeyCode.Space)) {
-
+              player.CheckForSword();
+                 if(player.CheckForSword() == true) {
             anim.SetTrigger("Attack");
             timeUntillMelee = meelespeed;
 
@@ -26,5 +27,6 @@ private void Update()
         } else {
             timeUntillMelee -= Time.deltaTime;
         }
+}
 }
 }
