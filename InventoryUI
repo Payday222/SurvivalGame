@@ -12,6 +12,7 @@ public class Inventory_UI : MonoBehaviour
     void Start()
     {
         invPanel.SetActive(false);
+        selectedSlot = slots[si];
     }
 
     void Update()
@@ -49,5 +50,59 @@ public class Inventory_UI : MonoBehaviour
             Refresh();
             }
 
+         }
+                  public void SelectSlot() {
+            if(Input.GetKeyDown(KeyCode.RightArrow)) {
+                si++;
+                selectedSlot = slots[si];
+                selectedSlot.image.color = Color.red;
+
+                if(si > 24) {
+                    si = 0;
+                }
+            } 
+            if(Input.GetKeyDown(KeyCode.LeftArrow)) {
+                si--;
+                selectedSlot = slots[si];
+                selectedSlot.image.color = Color.red;
+
+                if(si < 0) {
+                    si = 24;
+                }
+
+            }
+            if(Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) {
+                selectedSlot.image.color = Color.white;
+            }
+        
+         }
+         private void UseItem() {
+            if(Input.GetKeyDown(KeyCode.E)) {
+                Inventory.Slot slot = new Inventory.Slot();
+                switch(player.inventory.slots[si].itemname) { //this is essentailly the selected slot
+
+                    case "Turnip":
+                        player.currentHealth += 5; //add dice later...
+                        Debug.Log("Player health increased");
+                        player.inventory.slots[si].count--;
+                        if(player.inventory.slots[si].count == 0) {
+                        player.inventory.slots[si] = slot;
+                        }
+                    break;
+                    
+                    case "Shit":
+                        player.currentHealth -= 5; //add dice later...
+                        Debug.Log("Player health decreased");
+                        player.inventory.slots[si].count--;
+                        if(player.inventory.slots[si].count == 0) {
+                        player.inventory.slots[si] = slot;
+                        }
+                    break;
+
+                    default: 
+                        Debug.Log("UseItem Switch is invalid, check item names");
+                    break;
+                }
+            }
          }
      }
