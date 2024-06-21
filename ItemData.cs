@@ -7,9 +7,4 @@ public class itemdata : ScriptableObject
 {
 public string itemName = "Item Name";
 public Sprite icon;
-
-public string InteractionType;
-//! INTERACTION TYPES:
-//* Eat
-//* Hurt
 }
