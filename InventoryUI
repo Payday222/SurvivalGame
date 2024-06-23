@@ -69,10 +69,15 @@ public class Inventory_UI : MonoBehaviour
                 if(si < 0) {
                     si = 24;
                 }
+         IEnumerator ChangeSlotColorToWhite() {
+            yield return new WaitForSeconds(0.3f);
 
+            selectedSlot.image.color = Color.white;
+         }
             }
             if(Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) {
-                selectedSlot.image.color = Color.white;
+             StartCoroutine (ChangeSlotColorToWhite());
+
             }
         
          }
