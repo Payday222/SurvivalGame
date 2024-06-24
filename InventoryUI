@@ -123,5 +123,17 @@ private IEnumerator DeleteSelections() {
                     break;
                 }
             }
+            Refresh();
+         MoveItemToLeft();
+
          }
+                     public void MoveItemToLeft() {
+        for(int i = slots.Count - 1; i > 0; i--) {
+            if(player.inventory.slots[i].itemname != "" && player.inventory.slots[i - 1].itemname == "" && i > 0 ) {
+                player.inventory.slots[i - 1] = player.inventory.slots[i];
+                player.inventory.slots[i] = emptySlot;
+            }
+        } 
+        Refresh();
+    }
      }
