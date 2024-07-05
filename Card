@@ -1,0 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+    [RequireComponent(typeof(Card))]
+public class Card : MonoBehaviour
+{
+    public CardData cardData;
+void OnTriggerEnter2D(Collider2D other)
+{
+player player = other.GetComponent<player>();
+if (player) 
+{
+    Card card = GetComponent<Card>();
+
+
+    if (card != null) {
+        player.cardinv.Add(card);
+        Destroy(this.gameObject);
+    }
+}
+    }
+    }
