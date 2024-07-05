@@ -19,6 +19,7 @@ public GameObject SwordSwing;
 public int maxHealth;
 public int currentHealth;
 public HealthBar healthbar;
+public CardsInventory cardinv;
 public enum Dice {
         d4,
         d6,
@@ -85,6 +86,8 @@ void FixedUpdate()
 private void Awake()
 {
     inventory = new Inventory(24);
+    cardinv = new CardsInventory(5);
+
 }
 
 public void DropItem(item item) {
