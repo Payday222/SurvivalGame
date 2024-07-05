@@ -18,6 +18,7 @@ public Inventory inventory;
 public GameObject SwordSwing;
 public int maxHealth;
 public int currentHealth;
+public HealthBar healthbar;
 public enum Dice {
         d4,
         d6,
@@ -33,6 +34,8 @@ void Start()
 {
     maxHealth = 100;
     currentHealth = maxHealth;
+        healthbar.SetHealth();    
+
 }
 void Update()
 {
@@ -47,6 +50,10 @@ void OnTriggerEnter2D(Collider2D other)
       currentHealth -= other.gameObject.GetComponent<enemy>().damage;
       Debug.Log("" + currentHealth);
       Debug.Log("damage: " + other.gameObject.GetComponent<enemy>().damage);
+              healthbar.SetHealth();
+      if(currentHealth <= 0) {
+        Destroy(this.gameObject);
+      }
     }
 }
 public void Movement() {
