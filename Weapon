@@ -42,4 +42,16 @@ public int Weapondamage;
             break;
         }
 }
+void OnTriggerEnter2D(Collider2D other)
+{
+    if(other.gameObject.tag == "Enemy") {
+        RollDamageDice();
+        other.GetComponent<enemy>().enemyData.enemyCurrentHealth -= Weapondamage;
+        Debug.Log("Weapondmg" + Weapondamage);
+        Debug.Log("enemy hp" + other.GetComponent<enemy>().enemyData.enemyCurrentHealth );
+        if(other.GetComponent<enemy>().enemyData.enemyCurrentHealth <= 0) {
+            Destroy(other.gameObject);
+        }
+    }
+}
 }
