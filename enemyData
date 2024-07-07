@@ -8,8 +8,14 @@ using UnityEngine;
 public class enemyData : ScriptableObject
 {
 public string enemyName;
-public int enemyHealth;
-public enum damageide {
+public int enemyMaxHealth;
+public int enemyCurrentHealth;
+public int healthDiceMultiplier;
+public int damageDiceMultiplier;
+
+// TODO:
+//1. merge damageDice and HealthDice into one Dice enum;
+public enum damageDice {
         d4,
         d6,
         d8,
@@ -17,8 +23,8 @@ public enum damageide {
         d12,
         d20,
     }
-    public damageide _damageide;
-      public enum healthDice {
+        public damageDice _damageDice;
+    public enum healthDice {
 
         d4,
         d6,
@@ -28,9 +34,7 @@ public enum damageide {
         d20,
 
     }
-    public healthDice _healthDice;
-public int damage;
-public int enemyDamage;
+public healthDice _healthDice;
 public enum EnemyWeight {
     LIGHT,
     MEDIUM,
