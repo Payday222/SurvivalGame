@@ -35,19 +35,22 @@ public Dice dice;
 public int speed =  1;
 #region Data
 public void LoadData(GameData data) {
-    this.currentHealth = data.playerHealth; //logic is shit on this
+    this.currentHealth = data.playerHealth; 
+    this.transform.position = data.playerPosition;
     Debug.Log("playerhp" + currentHealth);
 }
 
 public void SaveData(ref GameData data) {
     data.playerHealth = this.currentHealth;
+    data.playerPosition = this.transform.position;
+    Debug.Log("saved player hp");
 }
 #endregion Data
 void Start()
 {
     
-        maxHealth = 5 * UnityEngine.Random.Range(1, 7); // 5d6 
-    currentHealth = maxHealth;
+    //     maxHealth = 5 * UnityEngine.Random.Range(1, 7); // 5d6 
+    // currentHealth = maxHealth;
     healthbar.SetHealth();    
 }
 void Update()
