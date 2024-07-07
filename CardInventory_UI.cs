@@ -34,14 +34,12 @@ Refresh();
     }
 }
 void Refresh() {
-    Debug.Log("refresh called");
 if(slots.Count == player.cardinv.slots.Count) {
     for(int i = 0; i < slots.Count; i++) {
         if(player.cardinv.slots[i].cardName != "") {
              slots[i].SetCard(player.cardinv.slots[i]);
         } else {
             this.slots[i].SetEmpty();
-            Debug.Log("Slot: " + i + "is set empty");
         }
     } 
 }
@@ -88,12 +86,12 @@ private IEnumerator DeleteSelections() {
 
  public void UseCard() {
      if(Input.GetKeyDown(KeyCode.E)) {
-         enemySpawner = GetComponent<EnemySpawner>();
+        //  enemySpawner = GetComponent<EnemySpawner>();
           selectedSlot.SetEmpty();
-            //  enemySpawner.MovePosition(); // nullreference //! fix this one day maybe lol
+              enemySpawner.MovePosition(); 
          switch(player.cardinv.slots[slotIndex].cardName) {
              case "Skeleton":
-                  Instantiate(skeleton, enemySpawner.transform); //nullreference... theres no escape
+                  Instantiate(skeleton, enemySpawner.gameObject.transform); 
              break;
          }
      }
