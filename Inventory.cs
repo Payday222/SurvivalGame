@@ -1,5 +1,3 @@
-using System.Security.Authentication;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
@@ -11,13 +9,14 @@ public class Inventory
         public string itemname;
         public int count;
         public int maxAllowed;
-        public Sprite icon;
+                public Sprite icon;
 
         public Slot() {
             itemname = "";
             count = 0;
             maxAllowed = 314;
         }
+
         public bool CanAddItem() {
             if(count < maxAllowed)
              {
@@ -67,4 +66,5 @@ public class Inventory
     public void Remove(int index) {
     slots[index].RemoveItem();
     }
+
 }
