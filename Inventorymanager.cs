@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Linq;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -18,7 +19,7 @@ void OnApplicationQuit()
 void Start()
 {
     LoadInventory();
-    DontDestroyOnLoad(this);
+    // DontDestroyOnLoad(this);
 }
       private void LoadInventory()
     {
@@ -27,24 +28,42 @@ void Start()
             Debug.Log("file path exists");
             string json = File.ReadAllText(savePath);
             inventoryData = JsonUtility.FromJson<InventoryData>(json);
-            foreach (var item in inventoryData.items)
+            // foreach (var item in inventoryData.items) // itemdata item, not oinventory item
+            for(int i = 0; i < player.inventory.slots.Count; i++) {
             {
-                // Find the corresponding slot by item name
-                Inventory.Slot slotToUpdate = player.inventory.slots.Find(slot => slot.itemname == item.itemName);
+                var item = inventoryData.items.ElementAt(i); // cant use index on a list
+                Inventory.Slot slotToUpdate = new Inventory.Slot();
+                slotToUpdate.count = item.count;
+                slotToUpdate.itemname = item.itemName;
+                Debug.Log("itemanme" + slotToUpdate.itemname);
+                Debug.Log("count" + slotToUpdate.count);
 
                 if (slotToUpdate != null)
                 {
-                    // Update the slot's count
                     slotToUpdate.itemname = item.itemName;
                     slotToUpdate.count = item.count;
+                    Debug.Log("adding slot to update");
+
+                        if(player.inventory.slots[i].itemname == "") {
+                            player.inventory.slots[i].itemname = slotToUpdate.itemname;
+                            player.inventory.slots[i].count = slotToUpdate.count;
+                        } else if(player.inventory.slots[i].itemname == slotToUpdate.itemname) {
+                            player.inventory.slots[i].count = slotToUpdate.count;
+                        }
+                    //please work:
+                    //thank you..... 
                 }
+
+                
                 else
                 {
                     Debug.LogWarning($"Slot for item '{item.itemName}' not found.");
                 }
             }
-        }
-        else
+        
+ 
+    }
+        } else
         {
             Debug.LogWarning("Inventory file not found. Creating a new one.");
         }
