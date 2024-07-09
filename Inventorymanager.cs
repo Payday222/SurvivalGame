@@ -25,12 +25,14 @@ void Start()
     {
         if (File.Exists(savePath))
         {
-            Debug.Log("file path exists");
+            // Debug.Log("file path exists");
             string json = File.ReadAllText(savePath);
             inventoryData = JsonUtility.FromJson<InventoryData>(json);
             // foreach (var item in inventoryData.items) // itemdata item, not oinventory item
-            for(int i = 0; i < player.inventory.slots.Count; i++) {
-            {
+            for(int i = 0; i < inventoryData.items.Count; i++) {
+            
+                Debug.Log("index: " + i);
+
                 var item = inventoryData.items.ElementAt(i); // cant use index on a list
                 Inventory.Slot slotToUpdate = new Inventory.Slot();
                 slotToUpdate.count = item.count;
@@ -42,7 +44,7 @@ void Start()
                 {
                     slotToUpdate.itemname = item.itemName;
                     slotToUpdate.count = item.count;
-                    Debug.Log("adding slot to update");
+                    // Debug.Log("adding slot to update");
 
                         if(player.inventory.slots[i].itemname == "") {
                             player.inventory.slots[i].itemname = slotToUpdate.itemname;
@@ -53,13 +55,11 @@ void Start()
                     //please work:
                     //thank you..... 
                 }
-
-                
                 else
                 {
                     Debug.LogWarning($"Slot for item '{item.itemName}' not found.");
                 }
-            }
+            
         
  
     }
