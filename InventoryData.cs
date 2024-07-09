@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using UnityEngine;
 
- [System.Serializable]
+[System.Serializable]
 
 public class InventoryData
 {
@@ -16,6 +17,7 @@ public class InventoryData
      public System.Guid id;
      public string itemName;
      public int count;
+     public Sprite icon;
  }
 
 

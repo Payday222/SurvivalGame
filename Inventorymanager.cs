@@ -37,6 +37,7 @@ void Start()
                 Inventory.Slot slotToUpdate = new Inventory.Slot();
                 slotToUpdate.count = item.count;
                 slotToUpdate.itemname = item.itemName;
+                slotToUpdate.icon = item.icon;
                 Debug.Log("itemanme" + slotToUpdate.itemname);
                 Debug.Log("count" + slotToUpdate.count);
 
@@ -49,6 +50,7 @@ void Start()
                         if(player.inventory.slots[i].itemname == "") {
                             player.inventory.slots[i].itemname = slotToUpdate.itemname;
                             player.inventory.slots[i].count = slotToUpdate.count;
+                            player.inventory.slots[i].icon = slotToUpdate.icon;
                         } else if(player.inventory.slots[i].itemname == slotToUpdate.itemname) {
                             player.inventory.slots[i].count = slotToUpdate.count;
                         }
@@ -79,13 +81,14 @@ void Start()
                 Item item = new Item
                 {
                     itemName = slot.itemname,
-                    count = slot.count
+                    count = slot.count,
+                    icon = slot.icon
+                    
                 };
                 itemsToSave.Add(item);
             }
         }
 
-        // Update the inventory data with the items to save
         inventoryData.items = itemsToSave;
 
         // Save the inventory data
