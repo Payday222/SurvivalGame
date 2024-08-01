@@ -1,16 +1,8 @@
-using System.Security.AccessControl;
-using System;
-using System.IO;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using Unity.VisualScripting;
 
 public class player : MonoBehaviour, IDataPersistence
 {
     //TODO:
-    //1.Make wallclip fix better lol
     //2.Health dies are chosen upon character selection
     
     private Vector2 direction;
@@ -20,8 +12,9 @@ public GameObject SwordSwing;
 public int maxHealth;
 public int currentHealth;
 public HealthBar healthbar;
+public SoulsBar soulsBar;
 public CardsInventory cardinv;
-
+public int counter = 0;
 public enum Dice {
         d4,
         d6,
@@ -33,28 +26,43 @@ public enum Dice {
 public Dice dice;
 
 public int speed =  1;
+public SpriteRenderer spR;
+public Sprite sprite;
+public int soulsCount;
+void Start()
+{   
+
+
+if(counter == 0) {
+        this.currentHealth = 5 * Random.Range(1, 7);
+        counter++;
+}
+    healthbar.SetHealth();    
+    soulsBar.SetSouls();
+
+}
 #region Data
 public void LoadData(GameData data) {
     this.currentHealth = data.playerHealth; 
     this.transform.position = data.playerPosition;
     Debug.Log("playerhp" + currentHealth);
+    counter = data.playerHealthSetCounter;
+    this.sprite = data.playerSprite;
 }
 
 public void SaveData(ref GameData data) {
     data.playerHealth = this.currentHealth;
     data.playerPosition = this.transform.position;
+    data.playerHealthSetCounter = counter;
+    data.playerSprite = this.sprite;
     Debug.Log("saved player hp");
 }
+
+
 #endregion Data
-void Start()
-{
-    
-    //     maxHealth = 5 * UnityEngine.Random.Range(1, 7); // 5d6 
-    // currentHealth = maxHealth;
-    healthbar.SetHealth();    
-}
 void Update()
 {
+    // spR.sprite = sprite;
     Movement();
     Vector2 distance = new Vector2 (this.transform.position.x + 5, this.transform.position.y + 10);
 }
