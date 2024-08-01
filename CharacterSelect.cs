@@ -17,7 +17,7 @@ public class CharacterSelect : MonoBehaviour
     {
         if(this.gameObject.activeSelf) {
         SelectCharacter();
-        currentCharacter.transform.position = new Vector2(0,0);
+        // currentCharacter.transform.position = new Vector2(0,0);
         } else {
             Destroy(this.gameObject);
         }
